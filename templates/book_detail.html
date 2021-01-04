@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}book details{% endblock title %}
+{% block content %}
+    <img src="{{book.cover.url}}" style=margin-left:4in; height="500px" width="500px" alt="">
+    <div class='container'>
+        {% for author in book.author.all %}
+        <h2>Title: {{book.title}}</h2>
+        <h3>Written By: {{author}},</h3>
+        <h5><b>isbn#: {{book.isbn}}</b></h5>
+        Published on: {{book.pub_date}}
+        <h5 style=color:green;>Only For ${{book.price}}!</h5>
+        {% endfor %}
+    </div>
+
+{%endblock content%}

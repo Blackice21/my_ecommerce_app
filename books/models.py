@@ -10,7 +10,7 @@ from django.db import models
 class Author(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    slug = models.SlugField()
+    slug = models.SlugField(default=first_name)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -19,7 +19,7 @@ class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.ManyToManyField(Author)
     isbn = models.CharField(max_length=16)
-    slug = models.SlugField()
+    slug = models.SlugField(default=title)
     pub_date = models.DateField(auto_now=True)
     price = models.FloatField()
     cover = models.ImageField()
