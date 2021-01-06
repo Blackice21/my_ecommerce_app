@@ -10,6 +10,9 @@
         Published on: {{book.pub_date}}
         <h5 style=color:green;>Only For ${{book.price}}!</h5>
         {% endfor %}
+        {% for chapter in book.chapter_set.all %}
+        <h3>Chapter {{chapter.chapter_number}}: {{chapter.title}}</h3>
+        {% endfor %}
     </div>
 
 {%endblock content%}
