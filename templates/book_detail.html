@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}book details{% endblock title %}
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'book_list'%}">book list</a></li>
+<li class="breadcrumb-item active">{{book.title}}</li>
+{% endblock breadcrumb %}
 {% block content %}
+
     <img src="{{book.cover.url}}" style=margin-left:4in; height="500px" width="500px" alt="">
     <div class='container'>
         {% for author in book.author.all %}
@@ -11,7 +16,7 @@
         <h5 style=color:green;>Only For ${{book.price}}!</h5>
         {% endfor %}
         {% for chapter in book.chapter_set.all %}
-        <h3>Chapter {{chapter.chapter_number}}: {{chapter.title}}</h3>
+        <a href="{% url 'chapter_detail' book.slug chapter.chapter_number %}"><h3>Chapter {{chapter.chapter_number}}: {{chapter.title}}</h3></a>
         {% endfor %}
     </div>
 

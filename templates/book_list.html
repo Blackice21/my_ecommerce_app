@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
-{% block title %}books{% endblock title %}
+{% block title %}book list{% endblock title %}
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="#">book list</a></li>
+{% endblock breadcrumb %}
+
 {% block content %}
     <h1 class='text-center'>Browse our Books!</h1>
     <br/>
@@ -13,7 +17,7 @@
                     <h3 class="card-title">{{book.title}}</h3>
                     <h4 class="card-title">Written By: <br/>{{author}}</h4>
                     <h5 class="card-title">Only ${{book.price}}!</h5>
-                    <a href="{% url 'chapter_detail' book.slug 1 %}" class="btn btn-primary">more info!</a>
+                    <a href="{% url 'book_detail' book.slug %}" class="btn btn-primary">more info!</a>
                     </div>
                 </div>
             </div>  
