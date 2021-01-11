@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.shortcuts import redirect, reverse
 # Create your models here.
 '''author
     book
@@ -26,6 +26,13 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+    
+    #def get_absolute_url(self):
+        #from django.core.urlresolvers import reverse
+     #   return redirect(reverse('book_list'))
+    def get_absolute_url(self):
+        #djanfromgo.core.urlresolvers import reverse
+        return reverse('book_detail', kwargs={'slug': self.slug})
 
 class Chapter(models.Model):
     title = models.CharField(max_length=100)
@@ -35,6 +42,14 @@ class Chapter(models.Model):
     def __str__(self):
          return self.title
 
+    def get_absolute_url(self):
+        #djanfromgo.core.urlresolvers import reverse
+        return reverse('chapter_detail', kwargs={
+            'book_slug': self.book.slug,
+            'chapter_number': self.chapter_number
+            })
+     
+
 class Exercise(models.Model):
     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
@@ -43,6 +58,14 @@ class Exercise(models.Model):
 
     def __str__(self):
         return self.title
+        
+    def get_absolute_url(self):
+        return reverse('exercise_detail', kwargs={
+                'book_slug': self.chapter.book.slug,
+                'chapter_number': self.chapter.chapter_number,
+                'chapter_title': self.chapter.title,
+                'ex_number': self.exercise_number
+                })
 
 class Solution(models.Model):
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)

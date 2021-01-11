@@ -16,7 +16,7 @@
         <h5 style=color:green;>Only For ${{book.price}}!</h5>
         {% endfor %}
         {% for chapter in book.chapter_set.all %}
-        <a href="{% url 'chapter_detail' book.slug chapter.chapter_number %}"><h3>Chapter {{chapter.chapter_number}}: {{chapter.title}}</h3></a>
+        <a href="{{chapter.get_absolute_url}}"><h3>Chapter {{chapter.chapter_number}}: {{chapter.title}}</h3></a>
         {% endfor %}
     </div>
 
