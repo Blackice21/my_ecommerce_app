@@ -6,8 +6,29 @@
     <li class="breadcrumb-item active">{{chapter.title}}</li>
 {% endblock breadcrumb %}
 {% block content %}
-<h1>This is Chapter {{chapter.chapter_number}}: {{chapter.title}}</h1>
-{% for exercise in chapter.exercise_set.all %}
-<a href="{{exercise.get_absolute_url}}">{{exercise.title}}</a>
-{% endfor %}
+
+<div class='row'>
+    <div class="main col-md-4" >
+        <div class='card'>
+            <img src="{{chapter.book.cover.url}}" class="card-img-top" alt="...">
+            <br/>
+            <h4 class="card-title">Chpt {{chapter.chapter_number}}: {{chapter.title}}</h4>
+            {% for author in chapter.book.author.all %}
+            <h5 class="card-title">Written By: {{author}},</h5>
+            {% endfor %}
+            <h6 class="card-text">Published on: {{chapter.book.pub_date}}</h4>
+            <h6 style=color:green;>Only For ${{chapter.book.price}}!</h5>
+        </div>
+    </div>
+    <div class="aside col-md-8" >
+        <div class="card"> 
+            <h3 class="card-header">Exercises</h3>
+            <ul class="list-group list-group-flush">
+            {% for exercise in chapter.exercise_set.all %}
+                <a href="{{exercise.get_absolute_url}}"><h5 class="card-header">Exercise {{exercise.exercise_number}}: {{exercise.title}}</h5></a>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock content %}

@@ -7,5 +7,41 @@
     <li class="breadcrumb-item active">{{exercise.title}}</li>
 {% endblock breadcrumb %}
 {% block content %}
-<h1>This is exercise #{{exercise.exercise_number}}: {{exercise.title}}</h1>
+
+<div class='row'>
+    <div class="main col-md-4" >
+        <div class='card'>
+            <img src="{{exercise.chapter.book.cover.url}}" class="card-img-top" alt="...">
+            <br/>
+            <h4 class="card-title">Exr {{exercise.exercise_number}}: {{exercise.title}}</h4>
+            {% for author in exercise.chapter.book.author.all %}
+            <h5 class="card-title">Written By: {{author}},</h5>
+            {% endfor %}
+            <h6 class="card-text">Published on: {{exercise.chapter.book.pub_date}}</h4>
+            <h6 style=color:green;>Only For ${{exercise.chapter.book.price}}!</h5>
+        </div>
+    </div>
+    <div class="aside col-md-8" >
+        <div class="card">
+            <h3 class="card-header">Solutions</h3>
+                {% for solution in exercise.solution_set.all %}
+                    <div class="accordion" id="toggle{{solution.sol_number}}">
+                        <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Solution {{solution.sol_number}}
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#toggle{{solution.sol_number}}">
+                            <div class="accordion-body">
+                                <img class="img-fluid" src="{{solution.image.url}}" alt="">
+                            </div>
+                        </div>
+                        </div>
+                    </div>    
+                {% endfor %}
+        </div>
+    </div>
+</div>
+
 {% endblock content %}

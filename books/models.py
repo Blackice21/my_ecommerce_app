@@ -68,6 +68,7 @@ class Exercise(models.Model):
                 })
 
 class Solution(models.Model):
+    sol_number = models.IntegerField(default=1)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     image = models.ImageField()
 

@@ -6,7 +6,7 @@
 
 {% block content %}
     <h1 class='text-center'>Browse our Books!</h1>
-    <br/>
+    <hr/>
     <div class="row">
         {% for book in book_list %}
         {% for author in book.author.all %}
@@ -14,9 +14,10 @@
                 <div class="card" style="width: 18rem;">
                     <img src="{{book.cover.url}}" class="card-img-top" alt="...">
                     <div class="card-body">
-                    <h3 class="card-title">{{book.title}}</h3>
-                    <h4 class="card-title">Written By: <br/>{{author}}</h4>
-                    <h5 class="card-title">Only ${{book.price}}!</h5>
+                    <h4 class="card-title">{{book.title}}</h4>
+                    <h5 class="card-subtitle mb-2 text-muted">{{book.pub_date}}</h5>
+                   <span><h5 class="card-title">Written By: <br/>{{author}}</h5></span>
+                    <h5 style=color:green;>Only ${{book.price}}!</h5>
                     <a href="{{book.get_absolute_url}}" class="btn btn-primary">more info!</a>
                     </div>
                 </div>

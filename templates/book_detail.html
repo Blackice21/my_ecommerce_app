@@ -5,19 +5,29 @@
 <li class="breadcrumb-item active">{{book.title}}</li>
 {% endblock breadcrumb %}
 {% block content %}
-
-    <img src="{{book.cover.url}}" style=margin-left:4in; height="500px" width="500px" alt="">
-    <div class='container'>
-        {% for author in book.author.all %}
-        <h2>Title: {{book.title}}</h2>
-        <h3>Written By: {{author}},</h3>
-        <h5><b>isbn#: {{book.isbn}}</b></h5>
-        Published on: {{book.pub_date}}
-        <h5 style=color:green;>Only For ${{book.price}}!</h5>
-        {% endfor %}
-        {% for chapter in book.chapter_set.all %}
-        <a href="{{chapter.get_absolute_url}}"><h3>Chapter {{chapter.chapter_number}}: {{chapter.title}}</h3></a>
-        {% endfor %}
+<div class='row'>
+    <div class="main col-md-4" >
+        <div class='card'>
+            <img src="{{book.cover.url}}" class="card-img-top" alt="...">
+            <br/>
+            <h4 class="card-title">Title: {{book.title}}</h4>
+            {% for author in book.author.all %}
+            <h5 class="card-title">Written By: {{author}},</h5>
+            {% endfor %}
+            <h6 class="card-text">Published on: {{book.pub_date}}</h4>
+            <h6 style=color:green;>Only For ${{book.price}}!</h5>
+        </div>
     </div>
+    <div class="aside col-md-8" >
+        <div class="card"> 
+            <h3 class="card-header">Chapters</h3>
+            <ul class="list-group list-group-flush">
+            {% for chapter in book.chapter_set.all %}
+                <a href="{{chapter.get_absolute_url}}"><h5 class="card-header">Chapter {{chapter.chapter_number}}: {{chapter.title}}</h5></a>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 
 {%endblock content%}
