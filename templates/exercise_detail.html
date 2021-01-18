@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}{{exercise.title}}{% endblock title %}
 {% block breadcrumb %} 
     <li class="breadcrumb-item"><a href="{% url 'book_list'%}">book list</a></li>
@@ -24,6 +25,7 @@
     <div class="aside col-md-8" >
         <div class="card">
             <h3 class="card-header">Solutions</h3>
+                {% if exercise.chapter.book in request.user.UserLibrary.book_list  %}
                 {% for solution in exercise.solution_set.all %}
                     <div class="accordion" id="toggle{{solution.sol_number}}">
                         <div class="accordion-item">
@@ -40,6 +42,13 @@
                         </div>
                     </div>    
                 {% endfor %}
+                {% else %}
+                    <div class="text-center">
+                        <h4>You must purchase this book to view the solutions.<br/>
+                            <a href="#">Purchase this book</a></h4>
+                        <img src="{% static 'stop_hand.webp' %}" height="" alt="">
+                    </div>               
+                {% endif %}
         </div>
     </div>
 </div>
