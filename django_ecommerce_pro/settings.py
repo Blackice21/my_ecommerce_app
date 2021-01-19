@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'books',
+    'shopping_cart',
     # allauth apps
     'django.contrib.sites',
     'allauth',
