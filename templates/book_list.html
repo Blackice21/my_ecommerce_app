@@ -12,12 +12,12 @@
         {% for author in book.author.all %}
             <div class='col-4'>
                 <div class="card" style="width: 18rem;">
-                    <img src="{{book.cover.url}}" class="card-img-top" alt="...">
+                    <h6 class="card-title text-center">{{book.title}}</h6>
+                    <img src="{{book.cover.url}}" class="img-fluid" alt="...">
                     <div class="card-body">
-                    <h4 class="card-title">{{book.title}}</h4>
-                    <h5 class="card-subtitle mb-2 text-muted">{{book.pub_date}}</h5>
-                   <span><h5 class="card-title">Written By: <br/>{{author}}</h5></span>
-                    <h5 style=color:green;>Only ${{book.price}}!</h5>
+                    <p class="card-subtitle mb-2 text-muted">Added On: <b>{{book.pub_date}}</b></p>
+                   <span><p class="card-title">Written By: <br/><b>{{author}}</b></p></span>
+                    <p style=color:green;>Only ${{book.price}}!</p>
                     <a href="{{book.get_absolute_url}}" class="btn btn-primary">more info!</a>
                     </div>
                 </div>

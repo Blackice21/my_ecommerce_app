@@ -13,6 +13,7 @@ def book_list(request):
 def book_detail(request, slug):
     book = get_object_or_404(Book, slug=slug)
     book_is_in_cart = False
+
     try:
         order = Order.objects.get(user=request.user)
         order_item = OrderItem.objects.get(books=book)
@@ -20,6 +21,8 @@ def book_detail(request, slug):
             book_is_in_cart = True
     except Order.DoesNotExist:
         order = None
+    except OrderItem.DoesNotExist:
+        order_item = None
 
     context = {
         'book': book,

@@ -17,7 +17,7 @@
             <h6 style=color:green;>Only For ${{book.price}}!</h5>
             {% if request.user.is_authenticated %}
             {% if item  %}
-                <a class="card-footer btn btn-warning" href="{% url 'add_to_cart' book.slug %}">remove from cart</a>
+                <a class="card-footer btn btn-warning" href="{% url 'remove_from_cart' book.slug %}">remove from cart</a>
             {% else %}
                 <a class="card-footer btn btn-warning" href="{% url 'add_to_cart' book.slug %}">add to cart</a>
             {% endif %}

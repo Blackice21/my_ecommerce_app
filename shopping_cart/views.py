@@ -6,8 +6,16 @@ from django.http import  HttpResponseRedirect
 
 def Add_to_cart(request, book_slug):
     book = get_object_or_404(Book, slug=book_slug)
-    order_item = OrderItem.objects.create(books=book)
+    order_item, creation = OrderItem.objects.get_or_create(books=book)
     order, created = Order.objects.get_or_create(user=request.user)
     order.items.add(order_item)
+    order.save()
+    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
+def Remove_from_cart(request, book_slug):
+    book = get_object_or_404(Book, slug=book_slug)
+    order_item = get_object_or_404(OrderItem, books=book)
+    order = get_object_or_404(Order, user=request.user)
+    order.items.remove(order_item)
     order.save()
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
