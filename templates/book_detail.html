@@ -8,14 +8,20 @@
 <div class='row'>
     <div class="main col-md-4" >
         <div class='card'>
+            <p class="card-title"><b>Title:</b> {{book.title}}</p>
             <img src="{{book.cover.url}}" class="card-img-top" alt="...">
-            <br/>
-            <h4 class="card-title">Title: {{book.title}}</h4>
             {% for author in book.author.all %}
-            <h5 class="card-title">Written By: {{author}},</h5>
+            <p class="card-title"><b>Written By:</b> {{author}},</p>
             {% endfor %}
-            <h6 class="card-text">Published on: {{book.pub_date}}</h4>
+            <p class="card-text"><b>Published on:</b> {{book.pub_date}}</p>
             <h6 style=color:green;>Only For ${{book.price}}!</h5>
+            {% if request.user.is_authenticated %}
+            {% if item  %}
+                <a class="card-footer btn btn-warning" href="{% url 'add_to_cart' book.slug %}">remove from cart</a>
+            {% else %}
+                <a class="card-footer btn btn-warning" href="{% url 'add_to_cart' book.slug %}">add to cart</a>
+            {% endif %}
+            {% endif %}
         </div>
     </div>
     <div class="aside col-md-8" >

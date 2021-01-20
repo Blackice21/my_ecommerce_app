@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Book, Chapter, Exercise
 from django.http import Http404
+from shopping_cart.models import Order, OrderItem
 # Create your views here.
 def book_list(request):
     book_list = Book.objects.all()
@@ -11,8 +12,18 @@ def book_list(request):
 
 def book_detail(request, slug):
     book = get_object_or_404(Book, slug=slug)
+    book_is_in_cart = False
+    try:
+        order = Order.objects.get(user=request.user)
+        order_item = OrderItem.objects.get(books=book)
+        if order_item in order.items.all():
+            book_is_in_cart = True
+    except Order.DoesNotExist:
+        order = None
+
     context = {
-        'book': book
+        'book': book,
+        'item': book_is_in_cart
     }
     return render(request, 'book_detail.html', context)
 

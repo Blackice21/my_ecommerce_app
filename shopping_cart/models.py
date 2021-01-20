@@ -7,7 +7,7 @@ class OrderItem(models.Model):
     books = models.ForeignKey(Book, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.book.title
+        return self.books.title
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -16,7 +16,7 @@ class Order(models.Model):
     is_ordered = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.ref_code
+        return self.user.username
 
 class Payment(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
