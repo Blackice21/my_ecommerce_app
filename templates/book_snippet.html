@@ -1,0 +1,21 @@
+<div class='card'>
+    <p class="card-title"><b>Title:</b> {{book.title}}</p>
+    <img src="{{book.cover.url}}" class="card-img-top" alt="...">
+    {% for author in book.author.all %}
+    <p class="card-title"><b>Written By:</b> {{author}},</p>
+    {% endfor %}
+    <p class="card-text"><b>Published on:</b> {{book.pub_date}}</p>
+    <h6 style=color:green;>Only For ${{book.price}}!</h5>
+    {% if book_status != 'owned' %}
+        <div class="card-footer">
+            {% if book_status == 'in_cart'  %}
+                <a class="card-footer btn btn-warning" href="{% url 'remove_from_cart' book.slug %}">
+                remove from cart</a>
+
+            {% else %}
+                <a class="card-footer btn btn-warning" href="{% url 'add_to_cart' book.slug %}">
+                add to cart</a>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

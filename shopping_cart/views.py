@@ -3,7 +3,6 @@ from .models import Order, OrderItem
 from books.models import Book
 from django.http import  HttpResponseRedirect
 # Create your views here.
-
 def Add_to_cart(request, book_slug):
     book = get_object_or_404(Book, slug=book_slug)
     order_item, creation = OrderItem.objects.get_or_create(books=book)
