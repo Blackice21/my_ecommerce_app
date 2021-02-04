@@ -18,3 +18,10 @@ def Remove_from_cart(request, book_slug):
     order.items.remove(order_item)
     order.save()
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
+def Order_summary(request):
+     order = get_object_or_404(Order, user=request.user)
+     context={
+         'order': order
+     }
+     return render(request, 'order_summary.html', context)

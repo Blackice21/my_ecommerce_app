@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 from django.conf import settings
 from books.models import Book
 
@@ -12,11 +13,17 @@ class OrderItem(models.Model):
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     items = models.ManyToManyField(OrderItem)
-    ref_code = models.CharField(max_length=200)
+    ref_code = models.CharField(max_length=200, blank=True)
     is_ordered = models.BooleanField(default=False)
+
+    def get_total(self):
+        return self.items.all().aggregate(order_total=Sum('books__price'))['order_total']
 
     def __str__(self):
         return self.user.username
+
+    def track(self):
+        return self.items.count    
 
 class Payment(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)

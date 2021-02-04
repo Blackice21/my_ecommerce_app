@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}{{chapter.title}}{% endblock title %}
-{% block breadcrumb %} 
+{% block breadcrumb %}
+    <li class="breadcrumb-item">->{{tr}}</li>
     <li class="breadcrumb-item"><a href="{% url 'book_list'%}">book list</a></li>
     <li class="breadcrumb-item"><a href="{{chapter.book.get_absolute_url}}">{{chapter.book.title}}</a></li>
     <li class="breadcrumb-item active">{{chapter.title}}</li>

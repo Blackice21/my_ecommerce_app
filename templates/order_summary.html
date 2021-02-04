@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}order summary{% endblock title %}
+{% block content %}
+
+<h1>Order Summary</h1>
+<table class="table table-hover table-bordered text-center">
+    <tr>
+       <th>no.</th>
+       <th>title</th> 
+       <th>sub total</th>
+    </tr>
+
+       {% for item in order.items.all %}
+       <tr>
+        <td>{{forloop.counter}}</td>   
+        <td>{{item.books.title}} <a href="{% url 'remove_from_cart' item.books.slug %}">DEL</a></td>
+        <td>{{item.books.price}}</td>
+       </tr>
+       {% empty %}
+        <tr>
+            <td colspan='3'>There are no items in your cart</td>
+        </tr>
+       {% endfor %}
+       <tr>
+        <td colspan="2">
+           <strong class="pull-right">Order Total:</strong>
+        </td>
+        <td colspan="1">
+            <strong class="pull-right">$  {{order.get_total}}</strong>
+         </td>
+       </tr>
+       {% if order.get_total %}
+        <tr>
+            <td colspan="3">
+                <a class="btn btn-warning" href="{% url 'book_list' %}">Continue Shopping</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <a class="btn btn-primary" href="{% url 'book_list' %}">Checkout</a>
+            </td>
+        </tr>
+        {% else %}
+         <tr>
+            <td colspan="3">
+                <a class="btn btn-warning" href="{% url 'book_list' %}">Add To Cart</a>
+            </td>
+         </tr>
+       {% endif %}    
+</table>
+
+{% endblock content %}

@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}{{exercise.title}}{% endblock title %}
 {% block breadcrumb %} 
+    <li class="breadcrumb-item">->{{tr}}</li>
     <li class="breadcrumb-item"><a href="{% url 'book_list'%}">book list</a></li>
     <li class="breadcrumb-item"><a href="{{exercise.chapter.book.get_absolute_url}}">{{exercise.chapter.book.title}}</a></li>
     <li class="breadcrumb-item"><a href="{{exercise.chapter.get_absolute_url}}">{{exercise.chapter.title}}</a></li>
